@@ -17,20 +17,26 @@ public class User {
 
     /**
      * Constructor of the class.
+     * 
      * @param username
      * @param firstName
      * @param lastName
      * @param emailAdress
      */
-    public User(final String username,
-	    final String firstName,
-	    final String lastName,
-	    final String emailAdress) {
+     User(String username, String firstName, String lastName, String emailAdress) {
         this.username = username;
         this.firstName = firstName;
 	this.lastName = lastName;
         this.emailAdress = emailAdress;
     }
+
+    User() {
+        this.username = username;
+        this.firstName = firstName;
+	this.lastName = lastName;
+        this.emailAdress = emailAdress;
+    }
+
 
     /**
      * Getter for username.

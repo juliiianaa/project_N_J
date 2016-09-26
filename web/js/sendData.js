@@ -8,8 +8,11 @@ function performAjaxSend() {
 //    This function is used to receive data from form and send it to the servlet LoginServlet
 
 //    Data of a form field is taken by its ID and saved in a parameter 
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("passw").value;
+    var usernameLogin = document.getElementById("userLogin").value;
+    var passwordLogin = document.getElementById("passwLogin").value;
+    
+    
+    alert(usernameLogin + ", " + passwordLogin);
 
 //    Ajax call, where the parameters are send to the Servlet
     $.ajax({
@@ -19,8 +22,8 @@ function performAjaxSend() {
         contentType: "application/x-www-form-urlencoded; charset=UTF-8;",
         dataType: "json",
         data: {
-            user:username,
-            passwordUser:password
+            user:usernameLogin,
+            passwordUser:passwordLogin
         },
         success: function (data) {
             alert('yay');
