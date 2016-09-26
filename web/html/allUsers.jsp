@@ -35,9 +35,6 @@
         </ul>
 
         
-  
-
-        
             <table id="user_table" class="display">
                 <thead>
                     <tr>
@@ -55,7 +52,6 @@
                             <td>${user.lastName }</td>
                             <td>${user.emailAdress }</td>
                         </tr>
-
                     </c:forEach>
                 </c:if>
                 <tfoot>

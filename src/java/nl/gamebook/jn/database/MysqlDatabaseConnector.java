@@ -7,6 +7,7 @@ package nl.gamebook.jn.database;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.*;
 
 /**
  *
@@ -41,14 +42,16 @@ public class MysqlDatabaseConnector {
         }
         
     }
-     
+
+ 
+
     /**
      *
      * disconnectDB, stops the connection of the database
      * 
      * @throws IOException
      */
-    public void disconnectDB() throws IOException {
+    public static void disconnectDB() throws IOException {
         try {
 	    //close the connection
             con.close();
@@ -72,7 +75,9 @@ public class MysqlDatabaseConnector {
 
         //SQL query for retrieving data from "users_information" table to log in user
         String sqlStatement = "SELECT * FROM users_information WHERE username=? AND password=md5(?)";
-
+        
+//        System.out.println(username + "," + password);
+        
         //Maka a prepared statement with query and fill in placeholders
         PreparedStatement ps = con.prepareStatement(sqlStatement);
         //username is placed in the first ?
@@ -95,8 +100,6 @@ public class MysqlDatabaseConnector {
                 String ln = rs.getString("lastName"); 
                 String email = rs.getString("email");
                 
-                System.out.println("user found" + " username: " + userDB + " lastname: " + ln + " email: " + email);
-                
                 
         }
        
@@ -106,6 +109,8 @@ public class MysqlDatabaseConnector {
     
         public void RegisterUser(String username, String name, String lastName, String email, String password) 
                 throws IOException, SQLException {
+            
+            
             
         //SQL query for adding data to "users_information" table 
         String sqlStatement = "INSERT into users_information (username, name, lastName, email, password) VALUES (?, ?, ?, ?, md5(?));";
@@ -127,6 +132,31 @@ public class MysqlDatabaseConnector {
         ps.executeUpdate();
                       
     }
-    
+        
+    public static List<User> getAllUser() throws SQLException{
+        
+        //SQL query for retrieving data from "users_information" table to log in user
+        String sqlStatement = "SELECT * FROM users_information";
+        Statement stm=(Statement) con.createStatement();
+//        executes the query
+        ResultSet rs = stm.executeQuery(sqlStatement);
+        
+        List<User> list = new ArrayList<>();
+
+        while (rs.next()) {
+            User u = new User();
+           
+            u.setUsername(rs.getString("username"));
+            u.setFirstName(rs.getString("name"));
+            u.setLastName(rs.getString("lastName"));
+            u.setEmailAdress(rs.getString("email"));
+            
+            list.add(u);
+            
+        }
+        
+        return list;
+      
+    }
     
 }

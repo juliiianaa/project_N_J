@@ -7,8 +7,10 @@ package nl.gamebook.jn.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,14 +20,10 @@ import nl.gamebook.jn.database.User;
 
 /**
  *
- * A servlet which receive the data from the ajax call in sendData.js (function called performAjaxSend)
- * 
- * 
- * @author Juliana Goh
+ * @author juulz
  */
-public class LoginServlet extends HttpServlet {
+public class AdminServlet extends HttpServlet {
 
-    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -35,33 +33,36 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-//        gets the parameter value given from AJAX
-        String username = request.getParameter("user");
-        String password = request.getParameter("passwordUser");
+        List<User> users = null; 
+        
+//          Makes a new object of MysqlDatabaseConnector
+//        MysqlDatabaseConnector con = new MysqlDatabaseConnector();
 
-//        Makes a new object of MysqlDatabaseConnector
-        MysqlDatabaseConnector conn = new MysqlDatabaseConnector();
-
-        try{
+        try {
 //            connects with the database
             MysqlDatabaseConnector.connectDB();
-
-//            If username and password is not empty, check users Login
-            if (username!=null&&password!=null) {
-//                Sends the data to the LoginUser method in MysqlDatabaseConnector class to check if the user already is registrated
-                User user = conn.LoginUser(username, password);
-            } else{
+        
+       
+           users = MysqlDatabaseConnector.getAllUser();
+           
+           MysqlDatabaseConnector.disconnectDB();
             
-            }       
-//            disconnects the database
-            MysqlDatabaseConnector.disconnectDB();
-
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
+        System.out.println(users.get(0).getFirstName());
+        
+        request.setAttribute("usersList", users); 
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/html/allUsers.jsp");  
+        rd.forward(request, response);
+        
+        
     }
 
 }
