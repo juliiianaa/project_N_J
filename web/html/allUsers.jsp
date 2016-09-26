@@ -9,16 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript" charset="utf8" src="../js/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="js/jquery.min.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-        <script src="../js/dataTables.js"></script>
+        <script type="text/javascript" charset="utf8" src="js/dataTables.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-        <link href="../css/menu.css" rel="stylesheet">
-        <link href="../css/book.css" rel="stylesheet">
+        <link href="css/menu.css" rel="stylesheet">
+        <link href="css/book.css" rel="stylesheet">
+         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         
         <title>JSP Page</title>
     </head>
-    <body>
+    
         
         <ul>
           <li><a class="active" href="../">Home</a></li>
@@ -34,38 +35,38 @@
         </ul>
 
         
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+  
 
-        <c:if test="${empty usersList}">
-            <table id="table_id" class="display">
+        
+            <table id="user_table" class="display">
                 <thead>
                     <tr>
                         <th>First name</th>
                         <th>Last name</th>
                         <th>username</th>
                         <th>email</th>
-                        <th>Admin</th>
                     </tr>
                 </thead>
-                <c:forEach items="${usersList}" var="user">
-                    <tr>
-                        <td>${user.username }</td>
-                        <td>${user.firstName }</td>
-                        <td>${user.lastName }</td>
-                        <td>${user.email }</td>
-                    </tr>
-                    
-                </c:forEach>
+                <c:if test="${not empty requestScope.usersList}">
+                    <c:forEach items="${requestScope.usersList}" var="user">
+                        <tr>
+                            <td>${user.username }</td>
+                            <td>${user.firstName }</td>
+                            <td>${user.lastName }</td>
+                            <td>${user.emailAdress }</td>
+                        </tr>
+
+                    </c:forEach>
+                </c:if>
                 <tfoot>
                     <tr>
                         <th>First name</th>
                         <th>Last name</th>
                         <th>username</th>
                         <th>email</th>
-                        <th>Admin</th>
                     </tr>
                 </tfoot>
             </table>
-        </c:if>
-    </body>
+        
+    
 </html>

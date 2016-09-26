@@ -31,10 +31,7 @@ public class User {
     }
 
     User() {
-        this.username = username;
-        this.firstName = firstName;
-	this.lastName = lastName;
-        this.emailAdress = emailAdress;
+        
     }
 
 
