@@ -24,13 +24,13 @@
           
           <p class="header-mandatory">All fields with an * are mandatory.</p>
           
-          <form action="/" method="post">
-          
+          <form>
+          <!-- registration form --> 
             <div class="field-wrap">
               <label>
                 Username<span class="req"></span>
               </label>
-              <input type="text" title="Optional field" />
+              <input id="username" type="text" title="Optional field" />
             </div>  
               
             <div class="top-row">
@@ -39,14 +39,14 @@
               <label>
                 First Name<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off" title="Mandatory field" />
+              <input id="name" type="text" required autocomplete="off" title="Mandatory field" />
             </div>
         
             <div class="field-wrap">
               <label>
                 Last Name<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off" title="Mandatory field" />
+              <input id="lastName" type="text" required autocomplete="off" title="Mandatory field" />
             </div>
           </div>
 
@@ -54,17 +54,17 @@
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email" required autocomplete="off" title="Mandatory field" />
+            <input id="email" type="email" required autocomplete="off" title="Mandatory field" />
           </div>
           
           <div class="field-wrap">
             <label>
               Set A Password<span class="req">*</span>
             </label>
-            <input type="password" required autocomplete="off" title="Mandatory field" />
+            <input id="password" type="password" required autocomplete="off" title="Mandatory field" />
           </div>
           
-          <button type="submit" class="button button-block">Get Started</button>
+          <button type="submit" class="button button-block" onClick="performAjaxRegSend()">Get Started</button>
           
           </form>
 
