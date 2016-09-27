@@ -14,6 +14,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String emailAdress;
+    private String userAccess;
 
     /**
      * Constructor of the class.
@@ -23,14 +24,14 @@ public class User {
      * @param lastName
      * @param emailAdress
      */
-     User(String username, String firstName, String lastName, String emailAdress) {
+     public User(String username, String firstName, String lastName, String emailAdress) {
         this.username = username;
         this.firstName = firstName;
 	this.lastName = lastName;
         this.emailAdress = emailAdress;
     }
 
-    User() {
+    public User() {
         
     }
 
@@ -97,6 +98,14 @@ public class User {
      */
     final public void setEmailAdress(String emailAdress) {
         this.emailAdress = emailAdress;
+    }
+
+    public String getUserAccess() {
+        return userAccess;
+    }
+
+    public void setUserAccess(String userAccess) {
+        this.userAccess = userAccess;
     }
 
 }

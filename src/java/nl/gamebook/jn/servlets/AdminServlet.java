@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import nl.gamebook.jn.database.MysqlDatabaseConnector;
+import nl.gamebook.jn.database.RetrieveMysqlData;
 import nl.gamebook.jn.database.User;
 
 /**
@@ -38,15 +39,12 @@ public class AdminServlet extends HttpServlet {
         
         List<User> users = null; 
         
-//          Makes a new object of MysqlDatabaseConnector
-//        MysqlDatabaseConnector con = new MysqlDatabaseConnector();
-
         try {
 //            connects with the database
             MysqlDatabaseConnector.connectDB();
-        
+            
        
-           users = MysqlDatabaseConnector.getAllUser();
+           users = RetrieveMysqlData.getAllUser();
            
            MysqlDatabaseConnector.disconnectDB();
             
@@ -56,7 +54,6 @@ public class AdminServlet extends HttpServlet {
         
         
         
-        System.out.println(users.get(0).getFirstName());
         
         request.setAttribute("usersList", users); 
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/html/allUsers.jsp");  

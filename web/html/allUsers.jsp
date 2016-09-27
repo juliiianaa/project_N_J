@@ -42,6 +42,7 @@
                         <th>Last name</th>
                         <th>username</th>
                         <th>email</th>
+                        <th>user access</th>
                     </tr>
                 </thead>
                 <c:if test="${not empty requestScope.usersList}">
@@ -51,6 +52,7 @@
                             <td>${user.firstName }</td>
                             <td>${user.lastName }</td>
                             <td>${user.emailAdress }</td>
+                            <td>${user.userAccess }</td>
                         </tr>
                     </c:forEach>
                 </c:if>
@@ -60,6 +62,7 @@
                         <th>Last name</th>
                         <th>username</th>
                         <th>email</th>
+                        <th>user access</th>
                     </tr>
                 </tfoot>
             </table>

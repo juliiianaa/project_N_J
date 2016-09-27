@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import nl.gamebook.jn.database.MysqlDatabaseConnector;
+import nl.gamebook.jn.database.UpdateMysqlTable;
 import nl.gamebook.jn.database.User;
 
 public class RegisterServlet extends HttpServlet {
@@ -38,9 +39,6 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");        
         String password = request.getParameter("password");
 
-//        Makes a new object of MysqlDatabaseConnector
-        MysqlDatabaseConnector conn = new MysqlDatabaseConnector();
-        
             
         System.out.println(username + " " + name + " " + lastName + " " + email + " " + password);
         
@@ -48,10 +46,12 @@ public class RegisterServlet extends HttpServlet {
 //            connects with the database
             MysqlDatabaseConnector.connectDB();
             
-           conn.RegisterUser(username, name, lastName, email, password);
+            UpdateMysqlTable ut = new UpdateMysqlTable();
+            
+            ut.RegisterUser(username, name, lastName, email, password);
 //                       }       
 //            disconnects the database
-            conn.disconnectDB();
+            MysqlDatabaseConnector.disconnectDB();
 
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
